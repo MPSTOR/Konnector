@@ -1,0 +1,6 @@
+
+#define TCMUR_VERSION_MAJOR 0
+#define TCMUR_VERSION_MINOR 9
+#define TCMUR_VERSION_PATCHLEVEL 2
+
+#define DEFAULT_HANDLER_PATH "/usr/lib/tcmu-runner"
