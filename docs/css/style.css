@@ -1,0 +1,174 @@
+#main {
+    position: relative;
+    width: 100%;
+    font-family: sans-serif;
+}
+
+hr {
+    margin: 65px;
+}
+
+#header {
+    height: 150px;
+    text-align: center;
+    width: 100%;
+}
+
+#logo {
+    
+}
+
+#logo img {
+    width: 100px;
+}
+
+#menu {
+    font-weight: bold; 
+}
+
+#menu ul,#menu li {
+list-style-type:none;
+display:inline;
+margin:0px 10px;
+}
+
+#menu a:link, #menu a:visited, #menu a:active {
+font-size:20px;
+color:#5D7393;
+padding:5px 5px 5px 5px;
+text-decoration: none;
+}
+
+#menu a:hover {
+color:#000;
+}
+
+#home .banner {
+    background-image: url("../img/Datacenter-Google-1.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    height: 200px;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+    padding-top: 100px
+}
+#home #home-title {
+    font-size: 35px;
+    color:#fff;
+    font-weight: bold;
+    text-shadow: 7px 7px 5px #000;
+}
+#home #home-subtitle {
+    font-size: 17px;
+    color:#fff;
+    text-shadow: 7px 7px 8px #000;
+}
+
+#section-columns {
+    margin-top: 25px;
+    overflow: hidden;
+    text-align: center
+}
+
+.column {
+    position: relative;
+    display: inline-block;
+    width: 25%;
+    padding-left: 2%;
+    padding-right: 2%;
+    text-align: left;
+    vertical-align: top;
+    
+}
+
+.column-title {
+    font-size: 20px;
+    color: #5D7393;
+    font-weight: bold;
+}
+
+.column-content {
+    font-size: 15px;
+}
+
+#home-content {
+    margin: 25px 75px;
+    
+}
+
+.home-content-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.home-content-content {
+    font-size: 15px;
+}
+
+#foot {
+    margin-top: 25px;
+    overflow: hidden;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.footcolumn {
+    position: relative;
+    display: inline-block;
+    width: 25%;
+    padding-left: 2%;
+    padding-right: 2%;
+    text-align: left;
+    
+}
+
+.footcolumn-title {
+    font-size: 15px;
+    color: #5D7393;
+    font-weight: bold;
+}
+
+.footcolumn-content {
+    font-size: 11px;
+}
+
+.banner-section {
+    position: relative;
+    height: 75px;
+    background-color: #eee;
+    font-size: 30px;
+    font-weight: bold;
+    padding-left: 100px;
+    padding-top: 25px;
+}
+
+.video {
+    text-align: center;
+}
+
+.page {
+    margin: 25px 100px;
+}
+
+.page-title {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.page-subtitle {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.page-image{
+    text-align: center;
+    margin: 20px;
+}
+
+.page-content {
+    padding-left: 15px;
+    font-size: 12px;
+}

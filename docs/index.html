@@ -1,1 +1,183 @@
-test
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TITLE</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/style.css">
+        <script src="js/jquery-3.0.0.min.js"></script>
+        <script src="js/functions.js"></script>
+    </head>
+    <body>
+        <div id="main">
+            <div id="header">
+                <div id="logo"><img src="img/logo.png" alt="Logo"/></div>
+                <div id="menu">
+                    <ul>
+                        <li><a href="#" onclick="openSection('home')">Home</a></li>
+                        <li><a href="#" onclick="openSection('architecture')">Architecture & Overview</a></li>
+                        <li><a href="#" onclick="openSection('videos')">Videos & Demos</a></li>
+                        <li><a href="#" onclick="openSection('documentation')">Documentation</a></li>
+                        <li><a href="#" onclick="openSection('about')">About</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section" id="home" style="display: block; overflow: visible;">
+                <div class="banner">
+                    <span id="home-title">Crystal: Open and Extensible Software-Defined Storage for OpenStack Swift</span><br />
+                    <span id="home-subtitle">Crystal allows you to deploy new storage functionalities in Swift thanks to an extensible data plane and manage their behavior via a dynamic control plane.</span> 
+                </div>
+                <div id="section-columns">
+                    <div class="column" id="column1">
+                        <span class="column-title">IFTTT-like SDS policies</span><br />
+                        <span class="column-content">Crystal enables administrators to write SDS policies in a "If-This-Then-Than" (IFTTT) form via a 
+                            DSL. These policies can change the behavior of the system by enforcing storage filters ("That"). The enforcement of filters 
+                            may be static or dynamic ("This"). A user-friendly dashboard enables administrators to write policies and control the system.</span>
+                    </div>
+                    <div class="column" id="column2">
+                        <span class="column-title">Flexible Introspection</span><br />
+                        <span class="column-content">The "This" part of Crystal's IFTTT-like policies refers to introspective information. Crystal enables 
+                            to define dynamic policies based on monitoring information and the metadata of object requests. Moreover, inspection metrics 
+                            can be plugged-in and exposed to the DSL at runtime.</span>
+                    </div>
+                    <div class="column" id="column3">
+                        <span class="column-title">Transparent Interception</span><br />
+                        <span class="column-content">In Crystal's IFTTT-like policies "That" means storage filters. Crystal enables administrators to 
+                            transparently intercept object requests with storage filters. Besides, developers can implement many types 
+                            of storage filters, ranging from storage management techniques to performance control.</span>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div id="home-content" >
+                    <span class="home-content-title">Understanding Crystal: A Simple Example</span><br />
+                    <span class="home-content-content">Crystal is devised to ease storage management in the cloud via Software-Define Storage models. To understand 
+                        how easy it is to manage your OpenStack Swift cluster, we show a simple example policy as they are defined in the Crystal 
+                        dashboard, as well as how it is enforce on object requests.</span>
+                </div>
+
+
+            </div>
+            <div class="section" id="architecture" style="display: none; overflow: hidden;">
+                <div class="banner-section">
+                    Architecture & Overview
+                </div>
+                <div class="page">
+
+
+
+                    <div class="page-title">
+                        Title example
+                    </div>
+                    <div class="page-subtitle">
+                        Subtitle example
+                    </div>
+                    <div class="page-content">
+                        Content example: In Crystal, administrators provision SDS services to tenants via policies. To open the control plane, 
+                        Crystal includes a metaprogramming DSL which is able to incorporate customizable instrospective information in form of 
+                        metrics, and very appealingly, that can be extended at runtime without side effects on the system operation. Further, it 
+                        offers and innovative distributed model for the controller. As a distinguishing feature, distributed controllers can be 
+                        auto-generated by the DSL itself for simple rule-based IFTTT-like policies. In addition, the control loop is extensible: 
+                        Developers can easily incorporate new metrics to capture the core aspects of the input workflows that can be consumed by 
+                        new controllers.
+                    </div>
+                    <div class="page-image">
+                        <img src="img/Blank.jpg" alt="blank"/>
+                    </div>
+                    <div class="page-content">
+                        Content example: The data plane executes arbitrary computations and transformations on objects flows to satisfy storage policies 
+                        or recipes. It provides two core extension points: The inspection triggers and interception filters. With the inspection triggers, 
+                        Crystal provides distributed controllers with introspective information on the state of the system at runtime. This allows the 
+                        control plane to dynamically respond to changes in input workloads in real time. Rich data plane programmability is delivered 
+                        through the interception filters, which intercept object flows in a transparent manner and run computations on them. An external 
+                        third party integrating a new filter only needs to contribute the logic; the deployment and execution of the filter is managed by 
+                        Crystal.
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="section" id="videos" style="display: none; overflow: hidden;">
+                <div class="banner-section">
+                    Videos & Demos
+                </div>
+                <div class="video">
+                    <iframe width="888" height="500" src="https://www.youtube.com/embed/_jKIuJSZL1o"  allowfullscreen></iframe>
+                </div>  
+                <br />
+                <div class="video">
+                    <iframe width="888" height="500" src="https://www.youtube.com/embed/2mMmKNhwUkw"  allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="section" id="documentation" style="display: none; overflow: hidden;">
+                <div class="banner-section">
+                    Documentation
+                </div>
+                <div class="page">
+
+
+
+                    <div class="page-title">
+                        Title example
+                    </div>
+                    <div class="page-subtitle">
+                        Subtitle example
+                    </div>
+                    <div class="page-content">
+                        Content example: In Crystal, administrators provision SDS services to tenants via policies. To open the control plane, 
+                        Crystal includes a metaprogramming DSL which is able to incorporate customizable instrospective information in form of 
+                        metrics, and very appealingly, that can be extended at runtime without side effects on the system operation. Further, it 
+                        offers and innovative distributed model for the controller. As a distinguishing feature, distributed controllers can be 
+                        auto-generated by the DSL itself for simple rule-based IFTTT-like policies. In addition, the control loop is extensible: 
+                        Developers can easily incorporate new metrics to capture the core aspects of the input workflows that can be consumed by 
+                        new controllers.
+                    </div>
+                    <div class="page-image">
+                        <img src="img/Blank.jpg" alt="blank"/>
+                    </div>
+                    <div class="page-content">
+                        Content example: The data plane executes arbitrary computations and transformations on objects flows to satisfy storage policies 
+                        or recipes. It provides two core extension points: The inspection triggers and interception filters. With the inspection triggers, 
+                        Crystal provides distributed controllers with introspective information on the state of the system at runtime. This allows the 
+                        control plane to dynamically respond to changes in input workloads in real time. Rich data plane programmability is delivered 
+                        through the interception filters, which intercept object flows in a transparent manner and run computations on them. An external 
+                        third party integrating a new filter only needs to contribute the logic; the deployment and execution of the filter is managed by 
+                        Crystal.
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="section" id="about" style="display: none; overflow: hidden;">
+                <div class="banner-section">
+                    About
+                </div>
+            </div>
+
+            <hr />
+
+            <div id="foot">
+                <div class="footcolumn" id="footcolumn1">
+                    <span class="footcolumn-title">Crystal</span><br />
+                    <span class="footcolumn-content">Crystal: Software-Defined Storage for OpenStack Swift<br />
+                        GitHub: https://github.com/Crystal-SDS<br />
+                        Please visit: http://iostack.eu/</span>
+                </div>
+                <div class="footcolumn" id="footcolumn2">
+                    <span class="footcolumn-title">ADDRESS</span><br />
+                    <span class="footcolumn-content">Lab144 (ETSE, Campus Sescelades)<br />
+                        Avinguda Països Catalans 26<br />
+                        43007 Tarragona (Spain)</span>
+                </div>
+                <div class="footcolumn" id="footcolumn3">
+                    <span class="footcolumn-title">CONTACT</span><br />
+                    <span class="footcolumn-content">twitter: https://twitter.com/GroupAST<br />
+                        direct: http://ast-deim.urv.cat/<br />
+                        e-mail: ast.research.group at gmail.com</span>
+                </div>
+
+            </div>
+        </div>
+    </body>
+</html>
