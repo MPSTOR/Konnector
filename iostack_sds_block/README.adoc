@@ -1,0 +1,21 @@
+= Orkestra SDS Block Storage API README
+Copyright 2015, MPSTOR Ltd. - info@mpstor.com
+
+HTTP API for Orkestra SDS (Software Defined Storage).
+
+The files in this package include:
+
+* link:LICENSE.txt[]: The licence which applies to the package contents,
+  excluding third-party files (see below).
+* link:sds-api.adoc[]: Describes the HTTP API provided by Orkestra SDS.
+* link:httpserver.py[]: The HTTP interface module.
+* link:bottle.py[]: library code used by httpserver.py
+* link:eskimo.py[]: library code used by httpserver.py
+* link:Makefile[]: contains rule to execute tests (do "make tests")
+* test/: directory containing test code.
+
+== Third-party contents
+
+Third party contents included in this package are subject to
+their own licences, as stated in the associated source files:
+Mox (http://www.apache.org/licenses/LICENSE-2.0[Apache License, Version 2.0]); Bottle (http://bottlepy.org/docs/dev/index.html#license[MIT License]).

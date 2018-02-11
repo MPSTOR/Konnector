@@ -1,0 +1,1122 @@
+= Orkestra SDS API
+Copyright 2015, MPSTOR Ltd. - info@mpstor.com
+Version 0.0
+:toc:
+:toc-placement: preamble
+
+HTTP API for Orkestra SDS (Software Defined Storage).
+
+== General
+
+=== Version
+
+For all requests, the API version number must be provided by
+the client in one of two ways:
+
+(a) by including a HTTP header 'API-Version', e.g., 'API-Version: 0'; or
+
+(b) by prefixing the URL, e.g., /v0/volumes.
+
+Only a major version number X is required, in which case X.0 is
+implied. The server includes a minor version in its response,
+which may be equal to or greater than the minor version
+specified in the request: minor version increments retain
+existing attributes to avoid breaking older clients.
+
+The version number header is omitted from the examples (as are
+most other headers).
+
+=== HTTP status codes
+
+The individual sections below do not list all possible values
+of the HTTP status code in the response, only the "normal" case.
+In other cases, there will be a "4xx" response for a user error,
+e.g., "403" if the specified resource does not exist, or a
+"5xx" response in case of a server error.
+
+=== Media type
+
+The default Content-Type is "application/json".
+HAL (https://tools.ietf.org/html/draft-kelly-json-hal-07[Hypertext Application Language])
+is also supported, but this support may be removed:
+for a documented API, the benefits it confers over a non-hyperlinked
+format are not compelling.
+
+=== Errors
+
+When a request results in an error, an attempt is made to return
+useful information in the body according to the draft RFC
+http://tools.ietf.org/html/draft-nottingham-http-problem-07["Problem Details for HTTP APIs"].
+For example:
+
+    # curl -X POST -H API-Version:0 $BASE_URL/policies/ -d'{"tier": "Business"}'
+    {"status": 400, "detail": "Must specify a value for 'name'."}
+
+== /nodes
+
+The storage nodes (storage arrays) known to the SDS server.
+
+=== GET /nodes
+
+==== Example
+
+    GET /nodes
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    [
+        {
+            "groups": [
+                7,
+                8
+            ],
+            "id": 1
+        },
+        {
+            "groups": [
+                7,
+                10
+            ],
+            "id": 2
+        }
+    ]
+
+== /nodes/<ID>
+
+One particular storage node.
+
+=== GET /nodes/<ID>
+
+==== Example
+
+    GET /nodes/2
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    {
+        "groups": [
+            7,
+            10
+        ],
+        "id": 2
+    }
+
+== /controllers
+
+A storage node controller.
+In the case of a dual-controller storage node, two controllers
+will reference the same node.
+
+=== GET /controllers
+
+==== Example
+
+    GET /controllers
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    [
+        {
+            "hostname": "10.0.15.20",
+            "id": 1,
+            "node": 1
+        },
+        {
+            "hostname": "10.0.15.24",
+            "id": 2,
+            "node": 2
+        }
+    ]
+
+== /controllers/<ID>
+
+One particular storage node controller.
+
+=== GET /controllers/<ID>
+
+==== Example
+
+    GET /controllers/2
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    {
+        "hostname": "10.0.15.24",
+        "id": 2,
+        "node": 2
+    }
+
+== /disks
+
+The disks on the storage nodes known to the SDS server.
+
+=== GET /disks
+
+==== Example
+
+    GET /disks
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    [
+        {
+            "id": 1,
+            "node": 1,
+            "size_gib": 464
+        },
+        {
+            "id": 1894,
+            "node": 2,
+            "size_gib": 4
+        }
+    ]
+
+== /disks/<ID>
+
+A particular disk.
+
+=== GET /disks/<ID>
+
+==== Example
+
+    GET /disks/1894
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    {
+        "id": 1894,
+        "node": 2,
+        "size_gib": 4
+    }
+
+== /volumes
+
+The collection of all volumes created through this API.
+This includes any snapshot volumes.
+
+=== POST /volumes
+
+Create a logical volume.
+
+.Table Parameters
+|===
+|name |type |description
+|size_gib
+|integer
+|Size in gigabytes of the volume to be created.
+Not required for snapshot volumes.
+
+|name
+|string
+|Optional: if no name is provided then a random unique name will be
+assigned.
+
+|group
+|integer
+|Optional. ID of storage group determining volume attributes and location.
+
+|snapshot_of
+|integer
+|Optional. If specified then the volume created will be a snapshot
+of the volume with the specified ID.
+|===
+
+==== Example
+
+    POST /volumes
+    {"name": "test-vol", "size_gib": 5}
+
+Response:
+
+    HTTP/1.0 201 Created
+    Location: /volumes/719
+
+    {
+        "created_at": "2015-09-29T13:03:12Z",
+        "group": null,
+        "id": 719,
+        "iqn": "iqn.2004-04.com.mpstor:test-vol.i707f6c9c09baa3896706",
+        "lun": 12,
+        "name": "test-vol",
+        "node": 1,
+        "portals": [
+            "10.0.15.20:3260"
+        ],
+        "proxy_for": null,
+        "serial": "0xb11c1b4d3a200172",
+        "size_gib": 5,
+        "snapshot_of": null,
+        "snapshots": [],
+        "status": null,
+        "vendor": "MPStor",
+        "wwns": []
+    }
+
+
+=== GET /volumes
+
+==== Example
+
+    GET /volumes
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    [
+        {
+            "created_at": "2015-09-25T08:05:53Z",
+            "group": 8,
+            "id": 718,
+            "iqn": "iqn.2004-04.com.mpstor:rest-vol.i3e058770eb5b30dd8cac",
+            "lun": 10,
+            "name": "rest-vol",
+            "node": 1,
+            "portals": [
+                "10.0.15.20:3260"
+            ],
+            "proxy_for": null,
+            "serial": "0xb11c1b4d3a200168",
+            "size_gib": 5,
+            "snapshot_of": null,
+            "snapshots": [],
+            "status": "OK",
+            "vendor": "MPStor",
+            "wwns": []
+        },
+        {
+            "created_at": "2015-09-29T13:03:12Z",
+            "group": null,
+            "id": 719,
+            "iqn": "iqn.2004-04.com.mpstor:test-vol.i707f6c9c09baa3896706",
+            "lun": 12,
+            "name": "test-vol",
+            "node": 1,
+            "portals": [
+                "10.0.15.20:3260"
+            ],
+            "proxy_for": null,
+            "serial": "0xb11c1b4d3a200172",
+            "size_gib": 5,
+            "snapshot_of": null,
+            "snapshots": [],
+            "status": "OK",
+            "vendor": "MPStor",
+            "wwns": []
+        }
+    ]
+
+== /volumes/<ID>
+
+A single logical volume created through this API.
+
+=== GET /volumes/<ID>
+
+==== Example
+
+    GET /volumes/719
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    {
+        "created_at": "2015-09-29T13:03:12Z",
+        "group": null,
+        "id": 719,
+        "iqn": "iqn.2004-04.com.mpstor:test-vol.i707f6c9c09baa3896706",
+        "lun": 12,
+        "name": "test-vol",
+        "node": 1,
+        "portals": [
+            "10.0.15.20:3260"
+        ],
+        "proxy_for": null,
+        "serial": "0xb11c1b4d3a200172",
+        "size_gib": 5,
+        "snapshot_of": null,
+        "snapshots": [],
+        "status": "OK",
+        "vendor": "MPStor",
+        "wwns": []
+    }
+
+=== DELETE /volumes/<ID>
+
+==== Example
+
+    DELETE /volumes/719
+
+Response:
+
+    HTTP/1.0 200 OK
+
+
+== /volumes/<ID>/snapshots
+
+The collection of snapshots of a particular logical volume.
+
+=== POST /volumes/<ID>/snapshots
+
+Create a snapshot of the specified volume.
+Equivalent to POST /volumes with snapshot_of set to <ID>.
+See <<POST /volumes>>.
+
+==== Example
+
+    POST /volumes/719/snapshots
+    {"name": "snap1-4"}
+
+Response:
+
+    HTTP/1.0 201 Created
+    Location: /volumes/721
+
+    {
+        "created_at": "2015-09-29T13:40:35Z",
+        "group": null,
+        "id": 721,
+        "iqn": "iqn.2004-04.com.mpstor:snap1-4.ia9d49363f927ae8ec6aa-1",
+        "lun": 14,
+        "name": "snap1-4",
+        "node": 1,
+        "portals": [
+            "10.0.15.20:3260"
+        ],
+        "proxy_for": null,
+        "serial": "0xb11c1b4d3a200179",
+        "size_gib": 5,
+        "snapshot_of": 719,
+        "snapshots": [],
+        "status": null,
+        "vendor": "MPStor",
+        "wwns": []
+    }
+
+=== GET /volumes/<ID>/snapshots
+
+Get the snapshots of the specified volume.
+
+==== Example
+
+    GET /volumes/719/snapshots
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    [
+        {
+            "created_at": "2015-09-29T13:40:35Z",
+            "group": null,
+            "id": 721,
+            "iqn": "iqn.2004-04.com.mpstor:snap1-4.ia9d49363f927ae8ec6aa-1",
+            "lun": 14,
+            "name": "snap1-4",
+            "node": 1,
+            "portals": [
+                "10.0.15.20:3260"
+            ],
+            "proxy_for": null,
+            "serial": "0xb11c1b4d3a200179",
+            "size_gib": 5,
+            "snapshot_of": 719,
+            "snapshots": [],
+            "status": "OK",
+            "vendor": "MPStor",
+            "wwns": []
+        }
+    ]
+
+== /volumes/<PARENT-ID>/snapshots/<ID>
+
+All snapshots are volumes.
+Provided the snapshot is a snapshot of the specified parent volume,
+this resource is equivalent to <<"/volumes/<ID>">>,
+which should be preferred.
+
+== /volumes/<ID>/connections/
+
+The connections that have been created for a particular volume.
+
+=== POST /volumes/<ID>/connections/
+
+This is equivalent to <<POST /connections>> with the value of
+the volume parameter set to <ID>.
+
+==== Example
+
+    POST /volumes/719/connections/
+
+Response:
+
+    HTTP/1.0 201 Created
+    Location: /connections/30
+
+    {
+        "consumer": null,
+        "created_at": "2015-09-29T15:27:52Z",
+        "disk": null,
+        "id": 30,
+        "initiator": 12,
+        "proxy": null,
+        "volume": 719
+    }
+
+=== GET /volumes/<ID>/connections
+
+==== Example
+
+    GET /volumes/719/connections
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    [
+        {
+            "consumer": null,
+            "created_at": "2015-09-29T15:27:52Z",
+            "disk": null,
+            "id": 30,
+            "initiator": 12,
+            "proxy": null,
+            "volume": 719
+        }
+    ]
+
+== /volumes/<VOL-ID>/connections/<ID>
+
+Provided the connection is a connection of the specified volume,
+this resource is equivalent to <<"/connections/<ID>">>,
+which should be preferred.
+
+== /initiators
+
+An initiator represents a potential consumer of a volume.
+
+=== POST /initiators
+
+Create an initiator.
+
+.Table Parameters
+|===
+|name |type |description
+
+|name
+|string
+|Optional: if no name is provided then a random unique name will be
+assigned.
+
+|iqn
+|string
+|Required for an iSCSI initiator. Example: "iqn.1993-08.org.debian:01:34dcc84aa8b".
+
+|username
+|string
+|For iSCSI initiators, if authentication by CHAP is required.
+
+|password
+|string
+|For iSCSI initiators, if authentication by CHAP is required.
+
+|wwn
+|string
+|For a Fibre Channel initiator, the World Wide Name of the consumer port
+as a hex string.
+Example: "abfedc0987654321".
+
+|sas_port
+|string
+|For SAS, the port ID of the SAS initiator port as a hex string.
+Example: "fedcba0987654321".
+|===
+
+==== Example
+
+    POST /initiators
+    {"wwn":"abfedc0987654321"}
+
+Response:
+
+    HTTP/1.0 201 Created
+    Location: /initiators/21
+
+    {
+        "created_at": "2015-09-29T14:19:46Z",
+        "id": 21,
+        "iqn": null,
+        "name": "uYFe6L4yUGl504at",
+        "password": null,
+        "sas_port": null,
+        "username": null,
+        "wwn": "0xabfedc0987654321"
+    }
+
+=== GET /initiators
+
+==== Example
+
+    GET /initiators
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    [
+        {
+            "created_at": "2015-09-16T15:06:12Z",
+            "id": 12,
+            "iqn": "iqn.1993-08.org.debian:01:34dcc84aa8b",
+            "name": "l6MNf3CC3CS0qriZ",
+            "password": null,
+            "sas_port": null,
+            "username": null,
+            "wwn": null
+        },
+        {
+            "created_at": "2015-09-29T14:19:46Z",
+            "id": 21,
+            "iqn": null,
+            "name": "uYFe6L4yUGl504at",
+            "password": null,
+            "sas_port": null,
+            "username": null,
+            "wwn": "0xabfedc0987654321"
+        }
+    ]
+
+== /initiators/<ID>
+
+Represents a single initiator.
+
+=== GET /initiators/<ID>
+
+==== Example
+
+    GET /initiators/12
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    {
+        "created_at": "2015-09-16T15:06:12Z",
+        "id": 12,
+        "iqn": "iqn.1993-08.org.debian:01:34dcc84aa8b",
+        "name": "l6MNf3CC3CS0qriZ",
+        "password": null,
+        "sas_port": null,
+        "username": null,
+        "wwn": null
+    }
+
+=== DELETE /initiators/<ID>
+
+==== Example
+
+    DELETE /initiators/21
+
+Response:
+
+    HTTP/1.0 200 OK
+
+== /connections
+
+A connection corresponds either to
+(1) permission granted to a particular initiator to read or write
+to a particular volume, or
+(2) the creation on a given consumer node of a proxy disk and,
+optionally, a proxy volume on that proxy disk, or
+(3) the establishment of a connection by communicating with the
+Konnector service on a consumer node (the "khost"), with the
+resulting device on that node being given by the "kdevice"
+attribute.
+In the case of (2), reads or writes locally to the proxy are
+routed to the original volume on whatever node the volume
+was created.
+
+=== POST /connections
+
+Create a connection.
+
+.Table Parameters
+|===
+|name |type |description
+
+|volume
+|integer
+|Required. The ID of the volume to which a connection is required.
+
+|initiator
+|integer
+|The ID of an initiator. Either an initiator or a consumer node or Konnector consumer node (khost) must be specified.
+
+|consumer
+|integer
+|The ID of a node on which a proxy disk/volume is to be created.
+
+|khost
+|string
+|The name or IP of a consumer node on which the Konnector service is running.
+
+|proxy
+|null
+|If a consumer node is specified then the connection's proxy attribute
+may be specified as null, in which case no proxy volume will be created.
+Otherwise, the server will assign to this attribute the ID of the
+proxy volume it creates.
+|===
+
+==== Example
+
+    POST /connections
+    {"volume": 719, "consumer": 2}
+
+Response:
+
+    {
+        "consumer": 2,
+        "created_at": "2015-09-30T08:04:41Z",
+        "disk": 1894,
+        "id": 34,
+        "initiator": null,
+        "kdevice": null,
+        "khost": null,
+        "proxy": 722,
+        "volume": 719
+    }
+
+=== GET /connections
+
+==== Example
+
+    GET /connections
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    [
+        {
+            "consumer": null,
+            "created_at": "2015-09-25T08:55:35Z",
+            "disk": null,
+            "id": 29,
+            "initiator": 12,
+            "kdevice": null,
+            "khost": null,
+            "proxy": null,
+            "volume": 718
+        },
+        {
+            "consumer": 2,
+            "created_at": "2015-09-30T08:04:41Z",
+            "disk": 1894,
+            "id": 34,
+            "initiator": null,
+            "kdevice": null,
+            "khost": null,
+            "proxy": 722,
+            "volume": 719
+        }
+    ]
+
+== /connections/<ID>
+
+A particular connection resource.
+
+=== GET /connections/<ID>
+
+==== Example
+
+    GET /connections/29
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    {
+        "consumer": null,
+        "created_at": "2015-09-25T08:55:35Z",
+        "disk": null,
+        "id": 29,
+        "initiator": 12,
+        "kdevice": null,
+        "khost": null,
+        "proxy": null,
+        "volume": 718
+    }
+
+
+=== DELETE /connections/<ID>
+
+==== Example
+
+    DELETE /connections/34
+
+Response:
+
+    HTTP/1.0 200 OK
+
+== /policies
+
+A storage policy may be associated with storage groups and determines
+certain characteristics of volumes created in those groups.
+
+=== POST /policies
+
+Create a new storage policy.
+
+.Table Parameters
+|===
+|name |type |description
+
+|name
+|string
+|Required. A unique name for the storage policy.
+
+|san_name
+|string
+|Storage Area Network Name: if specified, determines the ports on
+which new volumes are exported.
+
+|throttle_iops_read, throttle_iops_write,
+throttle_mbps_read, throttle_mbps_write
+|integer
+|Throttle volume reads or writes by IOs/s or MB/s. Use "null" to disable;
+otherwise, the throttle value must be an integer greater than 0.
+
+|tier
+|string
+|Media tier. Required. New volumes will be created only
+on resources (normally RAIDs) of the specified tier.
+Possible tiers include "Mission Critical", "Business", and "Archive".
+
+|filters
+|list of strings
+|Where a connection to a volume is made through the Konnector service,
+these are the filters to be added to the data path.
+Possible tiers include "Mission Critical", "Business", and "Archive".
+|===
+
+==== Example
+
+    POST /policies
+    {"name": "gold", "san_name":"10Gdata", "tier": "Mission Critical"}
+
+Response:
+
+    HTTP/1.0 201 Created
+    Location: /policies/8
+
+    {
+        "created_at": "2015-09-30T08:41:18Z",
+        "id": 8,
+        "filters": [],
+        "name": "gold",
+        "san_name": "10Gdata",
+        "throttle_iops_read": null,
+        "throttle_iops_write": null,
+        "throttle_mbps_read": null,
+        "throttle_mbps_write": null,
+        "tier": "Mission Critical"
+    }
+
+=== GET /policies
+
+==== Example
+
+    GET /policies
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    [
+        {
+            "created_at": "2015-09-21T11:03:30Z",
+            "id": 6,
+            "filters": [],
+            "name": "bronze",
+            "san_name": "1Gdata",
+            "throttle_iops_read": null,
+            "throttle_iops_write": null,
+            "throttle_mbps_read": null,
+            "throttle_mbps_write": null,
+            "tier": "Archive"
+        },
+        {
+            "created_at": "2015-09-30T08:41:18Z",
+            "id": 8,
+            "filters": [],
+            "name": "gold",
+            "san_name": "10Gdata",
+            "throttle_iops_read": null,
+            "throttle_iops_write": null,
+            "throttle_mbps_read": null,
+            "throttle_mbps_write": null,
+            "tier": "Mission Critical"
+        }
+    ]
+
+== /policies/<ID>
+
+A particular storage policy.
+
+=== GET /policies/<ID>
+
+==== Example
+
+    GET /policies/8
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    {
+        "created_at": "2015-09-30T08:41:18Z",
+        "id": 8,
+        "filters": [],
+        "name": "gold",
+        "san_name": "10Gdata",
+        "throttle_iops_read": null,
+        "throttle_iops_write": null,
+        "throttle_mbps_read": null,
+        "throttle_mbps_write": null,
+        "tier": "Mission Critical"
+    }
+
+=== PATCH /policies/<ID>
+
+Change one or more attributes of a storage policy.
+
+==== Example
+
+    PATCH /policies/6
+    {"tier":"Business"}
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    {
+        "created_at": "2015-09-21T11:03:30Z",
+        "id": 6,
+        "filters": [],
+        "name": "jack",
+        "san_name": null,
+        "throttle_iops_read": null,
+        "throttle_iops_write": null,
+        "throttle_mbps_read": null,
+        "throttle_mbps_write": null,
+        "tier": "Business"
+    }
+
+=== DELETE /policies/<ID>
+
+==== Example
+
+    DELETE /policies/8
+
+Response:
+
+    HTTP/1.0 200 OK
+
+== /groups
+
+A volume may be created in a storage group.
+A storage group determines the nodes on which that volume may be created
+and, by association with a storage policy, certain characteristics of
+the volume.
+
+=== POST /groups
+
+Create a new storage group.
+
+.Table Parameters
+|===
+|name |type |description
+
+|name
+|string
+|Required. A unique name for the storage group.
+
+|policy
+|integer
+|Required. The ID of a storage policy.
+|===
+
+==== Example
+
+    POST /groups
+    {"name": "local1..", "policy": 6}
+
+Response:
+
+    HTTP/1.0 201 Created
+    Location: /groups/11
+
+    {
+        "created_at": "2015-09-30T09:02:28Z",
+        "id": 11,
+        "name": "local1..",
+        "nodes": [],
+        "policy": 6
+    }
+
+=== GET /groups
+
+==== Example
+
+    GET /groups
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    [
+        {
+            "created_at": "2015-09-21T12:34:03Z",
+            "id": 10,
+            "name": "tip..",
+            "nodes": [
+                2
+            ],
+            "policy": 6
+        },
+        {
+            "created_at": "2015-09-30T09:02:28Z",
+            "id": 11,
+            "name": "local1..",
+            "nodes": [],
+            "policy": 6
+        }
+    ]
+
+== /groups/<ID>
+
+A particular storage group.
+
+=== GET /groups/<ID>
+
+==== Example
+
+    GET /groups/11
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    {
+        "created_at": "2015-09-30T09:02:28Z",
+        "id": 11,
+        "name": "local1..",
+        "nodes": [],
+        "policy": 6
+    }
+
+=== PATCH /groups/<ID>
+
+Change one or more attributes of a storage group.
+Note: to change the nodes in a storage group, see <<"/groups/<ID>/nodes">>.
+
+==== Example
+
+    PATCH /groups/10
+    {"policy": 5}
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    {
+        "created_at": "2015-09-21T12:34:03Z",
+        "id": 10,
+        "name": "tip..",
+        "nodes": [
+            2
+        ],
+        "policy": 5
+    }
+
+=== DELETE /groups/<ID>
+
+==== Example
+
+    DELETE /groups/10
+
+Response:
+
+    HTTP/1.0 200 OK
+
+== /groups/<ID>/nodes
+
+The storage nodes in a particular group.
+
+=== GET /groups/<ID>/nodes
+
+==== Example
+
+    GET /groups/10/nodes
+
+Response:
+
+    HTTP/1.0 200 OK
+
+    [
+        {
+            "groups": [
+                10
+            ],
+            "id": 2
+        }
+    ]
+
+== /groups/<GROUP-ID>/nodes/<ID>
+
+A storage node in a storage group.
+
+=== GET /groups/<GROUP-ID>/nodes/<ID>
+
+Provided the node is in the group, this is
+equivalent to <<"GET /nodes/<ID>">>, which should be preferred.
+If the node does not exist or is not in the group, a 404 response issues.
+
+=== PUT /groups/<GROUP-ID>/nodes/<ID>
+
+Add a storage node to a storage group.
+(Note: a "201" response will issue even if the node was already in the group.)
+
+==== Example
+
+    PUT /groups/10/nodes/1
+
+Response:
+
+    HTTP/1.0 201 Created
+
+=== DELETE /groups/<GROUP-ID>/nodes/<ID>
+
+Remove a storage node from a storage group.
+(This does not delete the storage node.)
+
+==== Example
+
+    DELETE /groups/10/nodes/1
+
+Response:
+
+    HTTP/1.0 200 OK

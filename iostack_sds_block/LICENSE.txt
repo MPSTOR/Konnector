@@ -1,0 +1,175 @@
+MPSTOR LTD. SOFTWARE LICENSE AGREEMENT
+
+
+IMPORTANT-READ CAREFULLY:
+
+This End-User License Agreement ('EULA') is a legal agreement between you
+(either an individual or a single entity) and MPSTOR Inc. (hereinafter
+'MPSTOR') for the MPSTOR software accompanying this EULA, which includes
+computer software and may include associated media, program documentation
+and printed materials, and "on-line" or electronic documentation ("Software
+Product" or "Software").
+
+READ THE TERMS OF THIS EULA TERMS BEFORE INSTALLING, COPYING OR USING THE
+SOFTWARE PRODUCT. INSTALLING, COPYING OR OTHERWISE USING THE SOFTWARE PRODUCT
+INDICATES YOUR ACCEPTANCE OF THIS EULA. IF YOU DO NOT AGREE TO THESE LICENSE
+TERMS, RETURN THE UNUSED SOFTWARE PRODUCT WITHIN THE WARRANTY PERIOD FOR
+A FULL REFUND. IF THIS SOFTWARE PRODUCT WAS ACQUIRED UNDER AN AGREEMENT
+WITH MPSTOR LTD., THEN ADDITIONAL TERMS SPECIFIED IN SUCH AGREEMENT MAY
+APPLY TO YOUR USE OF THE SOFTWARE.
+
+1. LICENSE GRANT. Subject to the terms set forth in this EULA, you may
+use one copy of the enclosed Software and associated program documentation
+("Documentation"), solely for your internal business purposes, for execution
+on a single computer only, and only in accordance with any applicable
+restrictions on use set forth in the Documentation. No license, right,
+or interest in any trademark, trade name, or service mark of MPSTOR or
+any third party is granted you under this License.
+
+2. INTELLECTUAL PROPERTY RIGHTS. All title, copyrights and other intellectual
+property rights in and to the Software Product (including but not limited
+to any images, text, and 'applets' incorporated into the Software product),
+the accompanying Documentation and any other printed materials, and any
+copies of the Software Product are owned by MPSTOR or its suppliers,
+and are protected by United States copyright and other laws relating
+to the protection of intellectual property and by international treaty
+provisions. Therefore, among other things, you must treat the Software and
+Documentation like any other copyrighted material (e.g., a book or musical
+recording). You may either(a) make one (1) copy of the Software solely
+for backup or (b) transfer the Software to a single hard disk provided
+you keep the original solely for backup or archival purposes. You must
+reproduce and include the copyright notice on the backup copy. You may
+not copy any of the Documentation. The Software Product is licensed not sold.
+
+3. RESTRICTED USE. Executing the Software on more than one computer/
+controller is strictly prohibited. You may not rent, lease or lend the
+Software, but you may make a one-time transfer of the Software, the
+Documentation, and this EULA on a permanent basis provided you retain no
+copies thereof and the transferee agrees to be bound by the terms of this
+EULA. Such transfer may not be by way of consignment or any other indirect
+transfer. You may not reverse engineer, decompile, or disassemble the
+Software. You may not rename, edit or create any derivative works from the
+Software or the Documentation. The Software Product is licensed as a single
+product. Its component parts may not be separated for use on more than one
+computer. Without prejudice to any other rights or remedies MPSTOR may have,
+this EULA shall terminate automatically if you fail to comply with the terms
+and conditions of this EULA. In such event, you must destroy all copies
+of the Software and the Documentation and all of their component parts.
+
+4. LIMITED 30-DAY WARRANTY. MPSTOR warrants to you (if you are the original
+licensee of this EULA only) for thirty (30) days from the date of delivery
+to you of the Software Product (the "Warranty Period"), that the Software
+shall perform substantially in accordance with the Documentation provided,
+and that any furnished media will be free from defects in material and
+workmanship under normal use. Any implied warranties are limited to thirty
+(30) days. Except, as expressly provided in the foregoing, the entire risk
+arising out of use or performance of the Software Product remains with you.
+
+5. NO OTHER WARRANTIES. The agents, employees, and distributors of MPSTOR are
+not authorized to make modifications to this warranty, nor are additional
+warranties binding on MPSTOR. Accordingly, additional statements such
+as advertising or presentations, whether oral or written, by MPSTOR, its
+distributors or its agents do not constitute warranties by MPSTOR and should
+not be relied upon as warranties by MPSTOR. EXCEPT AS EXPRESSLY PROVIDED
+IN SECTION 4 ABOVE, THE SOFTWARE IS BEING FURNISHED TO YOU ON AN "AS IS"
+BASIS ONLY, AND MPSTOR AND ITS SUPPLIERS MAKE NO OTHER REPRESENTATIONS,
+CONDITIONS, OR WARRANTIES, EXPRESSED OR IMPLIED. ANY IMPLIED WARRANTY
+OR CONDITIONS OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE,
+TITLE OR NON INFRINGEMENT IS EXPRESSLY DISCLAIMED BY MPSTOR AND ITS
+SUPPLIERS. IF SUCH DISCLAIMER IS DISALLOWED BY A COURT OF LAW, THEN ANY
+IMPLIED WARRANTY OR CONDITION OF MERCHANTABILITY OR FITNESS FOR PARTICULAR
+PURPOSE IS LIMITED IN DURATION TO THE 30-DAY WARRANTY PERIOD. Some states
+do not allow limitations on how long an implied warranty lasts, so the
+above limitations may not apply to you. This warranty gives you specific
+legal rights and you may have other rights, which vary from state to state.
+
+6. CUSTOMER REMEDIES. YOUR SOLE AND EXCLUSIVE REMEDY AND MPSTOR'S SOLE AND
+EXCLUSIVE LIABILITY HEREUNDER SHALL BE, UPON YOUR RETURN OF THE SOFTWARE
+TO MPSTOR WITH THE RECEIPT WITHIN THE WARRANTY PERIOD, AT MPSTOR OPTION,
+REPLACEMENT OR REPAIR OF SOFTWARE THAT DOES NOT MEET MPSTOR LIMITED WARRANTY
+OR A REFUND OF THE SOFTWARE'S PURCHASE PRICE. MPSTOR'S SUPPLIERS SHALL
+NOT BE HELD TO ANY LIABILITY FOR ANY DAMAGES SUFFERED OR INCURRED BY YOU.
+
+7. NO LIABILITY FOR CONSEQUENTIAL DAMAGES. IN NO EVENT SHALL MPSTOR OR ITS
+SUPPLIERS BE LIABLE TO YOU OR ANY OTHER PERSON FOR ANY INCIDENTAL COLLATERAL,
+SPECIAL, OR CONSEQUENTIAL DAMAGES, INCLUDING WITHOUT LIMITATION, DAMAGES
+FOR LOSS OF PROFITS, LOSS OF CUSTOMERS, LOSS OF GOOD-WILL, WORK STOPPAGE,
+DATA LOSS, COMPUTER FAILURE OR MALFUNCTION, CLAIMS BY ANY PARTY OTHER THAN
+YOU, OR ANY AND ALL SIMILAR DAMAGES OR LOSS EVEN IF MPSTOR, ITS SUPPLIERS,
+OR ITS AGENT HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+8. LIMITATION OF LIABILITY. MPSTOR'S LIABILITY UNDER ANY PROVISION
+OF THIS AGREEMENT OR OTHERWISE SHALL NOT EXCEED THE AMOUNT YOU PAID
+FOR THE SOFTWARE. MPSTOR shall have no liability or responsibility for
+Software altered, modified, or converted by you or a third party, damages
+resulting from accident, abuse, or misapplication, or for problems due to
+the malfunction of your hardware or software not supplied by MPSTOR. THE
+FOREGOING LIMITATIONS, EXCLUSIONS AND DISCLAIMERS SET FORTH IN THIS EULA
+SHALL APPLY TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, EVEN IF
+ANY REMEDY FAILS ITS ESSENTIAL PURPOSE.
+
+9. TERMINATION. This EULA is effective until terminated and terminates
+without notice from MPSTOR if you fail to comply with any of its
+provisions. Upon termination you shall destroy the Software and all copies
+or portions thereof, together with the Documentation.
+
+10. GENERAL. This EULA has been made in and its validity, interpretation,
+construction and performance shall be governed by and be in accordance
+with the laws of Ireland. This EULA represents the entire statement of the
+understandings and agreements among the parties in regard to the subject
+matter hereof.
+
+11. U.S. GOVERNMENT RESTRICTED RIGHTS. This Software and Documentation
+is provided with RESTRICTED RIGHTS. Use, duplication, or disclosure by
+the Government is subject to restrictions as set forth in subparagraph
+(c)(1)(ii) of the clause at DFAR 252.227-7013, Rights in Technical Data and
+Computer Software or subparagraphs (c)(1) and (2) of the Commercial Computer
+Software - Restricted Rights of CFR 52.227-19, as applicable. Manufacturer
+is MPSTOR LTD.
+
+12. EXPORT RESTRICTIONS. You agree that you will not export or re-export the
+Software to any country, person, entity or end user subject to U.S. export
+restrictions. You specifically agree not to export or re-export the Software:
+(i) to any country to which the U.S. has embargoed or restricted the export
+of goods or services, which currently include, but are not necessarily
+limited to Cuba, Iran, Iraq, Libya, North Korea, Sudan and Syria, or to any
+national of any such country, wherever located, who intends to transmit or
+transport the products back to such country; (ii) to any end-user who you
+know or have reason to know will utilize the Software or portion thereof
+in the design, development or production of nuclear, chemical or biological
+weapons; or (iii) to any end-user who has been prohibited from participating
+in U.S. export transactions by any federal agency of the U.S. government.
+
+13. EFFECT OF WAIVER; SEVERABILITY. Failure by MPSTOR to enforce any
+provision of this EULA shall not be deemed a waiver of that provision or
+of any other provision of this EULA. Any waiver of a provision of this
+EULA at a particular time or under particular circumstances shall not
+have the effect of waiving any other provision, or of waiving the same
+provision at a different time or under different circumstances. If any
+provision or part of this EULA shall, to any extent, be or become invalid
+or unenforceable, the remainder of this EULA shall not be affected thereby,
+and every other provision of this EULA shall remain valid and enforceable
+to the full extent permitted by law. Further, any term or condition which
+is held to be illegal or unenforceable shall remain in effect as far as
+possible in accordance with the intention of the parties.
+
+14. ENTIRE AGREEMENT. This EULA is the complete and exclusive agreement
+between you and MPSTOR, superseding all other prior arrangements,
+understandings, practices, communications and agreements between the
+parties relating this subject matter.
+
+15. INJUNCTIVE RELIEF. You understand and agree that notwithstanding any
+other provisions of this EULA, a breach by OEM of Section 1 (.License
+Grant.) or Section 3 (.Restrictions on Use.) may cause MPSTOR irreparable
+damage for which recovery of money damages would be inadequate. In addition
+to any and all remedies available at law, MPSTOR shall be entitled, in
+the event of any such breach, as a matter of right, to timely injunctive
+relief or other equitable relief without the need for posting a bond in any
+court of competent jurisdiction to prevent violation or contravention of
+Section 1 or 2 and to compel compliance with the terms thereof by you. You
+hereby irrevocable waive any defense based on the adequacy of any remedy at
+law which might otherwise be asserted by MPSTOR as a bar to the remedy of
+specific performance in any action brought by MPSTOR to enforce its rights
+under this Section. Should you have any questions concerning this EULA,
+or if you desire to contact MPSTOR for any reason, please contact MPSTOR
+Inc at eula@mpstor.com
