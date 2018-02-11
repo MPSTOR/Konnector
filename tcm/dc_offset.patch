@@ -1,0 +1,34 @@
+--- ./mp_filter_stack.c	2015-10-16 07:51:01.284000000 +0000
++++ ./mp_filter_stack.c	2016-03-07 04:38:55.519000000 +0000
+@@ -324,7 +324,7 @@
+ 
+ 		if(dev->filter_cnt){//spawn out to process read filter stack - DC
+                         for(i = dev->filter_cnt; i ;i--){
+-                                dev->read_xform[i-1]( (void*) buf, (unsigned long)length, (unsigned long)0);
++                                dev->read_xform[i-1]( (void*) buf, (unsigned long)length, offset);
+ 				dbgp("%s read filter executed \n", dev->get_filter_name[i-1]());//should only execute if debug is enabled - DC
+ 			}
+                 }
+@@ -360,7 +360,7 @@
+ 
+ 			if(dev->filter_cnt){//spawn out and executed write transform stack - DC
+                                 for(i = 0; i < dev->filter_cnt; i++){
+-                                        dev->write_xform[i]( (void*) iovec->iov_base, (unsigned long)to_copy, (unsigned long)0);
++                                        dev->write_xform[i]( (void*) iovec->iov_base, (unsigned long)to_copy, offset);
+ 					dbgp("%s write filter executed \n", dev->get_filter_name[i]());//should only execute if debug is enabled - DC
+                         	}
+                         }
+
+--- ./tcmu-runner.h   2016-03-08 07:58:01.810000000 +0000
++++ ./tcmu-runner.h       2016-03-08 08:00:58.049000000 +0000
+@@ -47,8 +47,8 @@
+        void *hm_private; /* private ptr for handler module */
+        //below variables and function prototypes for filter stack - DC
+        unsigned long filter_cnt;
+-        void (*write_xform[FILTER_MAX])(void* buf, unsigned long cnt, unsigned long offset);
+-        void (*read_xform[FILTER_MAX])(void* buf, unsigned long cnt, unsigned long offset);
++        void (*write_xform[FILTER_MAX])(void* buf, unsigned long cnt, uint64_t offset);
++        void (*read_xform[FILTER_MAX])(void* buf, unsigned long cnt, uint64_t offset);
+        char *(*get_filter_name[FILTER_MAX])(void);
+ };
+
