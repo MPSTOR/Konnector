@@ -98,6 +98,37 @@ err:
 	return;
 }
 
+void apply_read_throttle_iops( struct tcmu_device *dev,  char* throttle  )
+{
+        char* config = dev->cfgstring;
+        char* throttle_amt = strchr(throttle, '-') + 1;
+        char* throttle_cmd;
+        char* device;
+        char throttle_out[32];
+        unsigned int throttle_val_iops=0;
+        int string_mem;
+
+        device = strrchr(config,'/') + 1;
+        dbgp("Device  %s \n", device ) ;
+        dbgp("Read throttle value  %s \n", throttle_amt );
+        throttle_val_iops=atoi(throttle_amt);
+        //itoa(throttle_val_bps, throttle_out, 10);
+        sprintf(throttle_out,"%d",throttle_val_iops);//NB, it appears that itoa is not supported so vanilla sprintf instead to convert back to string - DC
+        //below builds final string that is sent to BASH as a cgroup based throttling command - DC
+        string_mem = asprintf(&throttle_cmd, "echo \"$(cat \"/sys/block/%s\"/dev) %s\" >> /sys/fs/cgroup/blkio/blkio.throttle.read_iops_device", device, throttle_out);
+
+        if (string_mem == -1) {
+                errp("ENOMEM\n");
+                goto err;
+        }
+
+        system(throttle_cmd);
+
+        free(throttle_cmd);
+
+err:
+        return;
+}
 
 void apply_write_throttle_mbs( struct tcmu_device *dev,  char* throttle  )
 {
@@ -132,6 +163,37 @@ err:
         return;
 }
 
+void apply_write_throttle_iops( struct tcmu_device *dev,  char* throttle  )
+{
+        char* config = dev->cfgstring;
+        char* throttle_amt = strchr(throttle, '-') + 1;
+        char* throttle_cmd;
+        char* device;
+        char throttle_out[32];
+        unsigned int throttle_val_iops=0;
+        int string_mem;
+
+        device = strrchr(config,'/') + 1;
+        dbgp("Device  %s \n", device ) ;
+        dbgp("Write throttle value  %s \n", throttle_amt );
+        throttle_val_iops=atoi(throttle_amt);
+        //itoa(throttle_val_bps, throttle_out, 10);
+        sprintf(throttle_out,"%d",throttle_val_iops);//NB, it appears that itoa is not supported so vanilla sprintf instead to convert back to string - DC
+        //below builds final string that is sent to BASH as a cgroup based throttling command - DC
+        string_mem = asprintf(&throttle_cmd, "echo \"$(cat \"/sys/block/%s\"/dev) %s\" >> /sys/fs/cgroup/blkio/blkio.throttle.write_iops_device", device, throttle_out);
+
+        if (string_mem == -1) {
+                errp("ENOMEM\n");
+                goto err;
+        }
+
+        system( throttle_cmd );
+
+        free(throttle_cmd);
+
+err:
+        return;
+}
 
 int link_filter(struct tcmu_device *dev,  char* filter_verb)
 {
@@ -159,12 +221,27 @@ int link_filter(struct tcmu_device *dev,  char* filter_verb)
 
         }
 
+	if (strncmp ("rit-",filter_verb,4) == 0) {
+                dbgp("Received read throttle IOPS command  %s \n", filter_verb );
+                apply_read_throttle_iops( dev,  filter_verb );
+                return 1;
+
+        }
+
+        if (strncmp ("wit-",filter_verb,4) == 0) {
+                dbgp("Received write throttle IOPS command  %s \n", filter_verb );
+                apply_write_throttle_iops( dev,  filter_verb );
+                return 1;
+
+        }
+/*
 	if (strncmp ("bop ",filter_verb,4) == 0) {
                 dbgp("Received bop command  %s \n", filter_verb );
                 return 1;
 
         }
-      	debug_write (filter_verb);
+*/  
+    	debug_write (filter_verb);
 
 	char* has_args = strchr(filter_verb, '(');//check for a list of arguments which will begin with '(' - DC 24/10/2016
 
